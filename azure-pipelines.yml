@@ -32,4 +32,4 @@ steps:
     command: 'push'
     packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
     nuGetFeedType: 'external'
-    publishFeedCredentials: 'DotNetStatic'
+    publishFeedCredentials: 'DotNetStatic-BasicAuth'
