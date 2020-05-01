@@ -27,10 +27,12 @@ To exit the application use "CTRL+C" or close the command prompt.
 Command Line:
 `dotnetstatic start [options]`
 
+```
 Options:
   -p|--port <port>       Set port number [default: 8080]
   -d|--directory <path>  Set content path [default: where the command was executed from]
-  
+```
+
 ## Examples:
 
 ### Command Prompt
