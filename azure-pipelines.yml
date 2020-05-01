@@ -22,15 +22,12 @@ steps:
 - task: NuGetCommand@2
   inputs:
     command: pack
+    includeSymbols: true
     packagesToPack: '**/*.csproj'
     versioningScheme: byPrereleaseNumber
     majorVersion: '$(Major)'
     minorVersion: '$(Minor)'
     patchVersion: '$(Patch)'
-
-- task: NuGetAuthenticate@0
-  inputs:
-    nuGetServiceConnections: 'DotNetStatic'
 
 - task: NuGetCommand@2
   inputs:
