@@ -21,7 +21,6 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
-    nobuild: true
     packagesToPack: '**/*.csproj'
     includesymbols: true
     versioningScheme: 'byEnvVar'
