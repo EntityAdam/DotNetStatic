@@ -1,0 +1,40 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-2019'
+
+variables:
+  Major: '1'
+  Minor: '0'
+  Patch: '0'
+  configuration: 'Release'
+  projectPath: 'DotNetStatic/DotNetStatic.csproj'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Build the project'
+  inputs:
+    command: 'build'
+    configuration: $(configuration)
+    projects: $(projectPath)
+
+- task: NuGetCommand@2
+  inputs:
+    command: pack
+    packagesToPack: '**/*.csproj'
+    versioningScheme: byPrereleaseNumber
+    majorVersion: '$(Major)'
+    minorVersion: '$(Minor)'
+    patchVersion: '$(Patch)'
+
+- task: NuGetAuthenticate@0
+  inputs:
+    nuGetServiceConnections: 'DotNetStatic'
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+    nuGetFeedType: 'external'
+    publishFeedCredentials: 'DotNetStatic'
