@@ -12,7 +12,8 @@ pool:
 variables:
   Major: '1'
   Minor: '0'
-  Patch: '0'
+  patch: $[counter(variables['minor'], 0)]
+  NugetVersion: $(major).$(minor).$(patch)
   configuration: 'Release'
   projectPath: 'DotNetStatic/DotNetStatic.csproj'
 
@@ -20,12 +21,11 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'pack'
+    nobuild: true
     packagesToPack: '**/*.csproj'
     includesymbols: true
-    versioningScheme: 'byPrereleaseNumber'
-    majorVersion: '$(Major)'
-    minorVersion: '$(Minor)'
-    patchVersion: '$(Patch)'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'NugetVersion'
 
 - task: PublishBuildArtifacts@1
   inputs:
