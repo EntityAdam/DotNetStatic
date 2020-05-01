@@ -28,13 +28,14 @@ steps:
 
 - task: NuGetCommand@2
   inputs:
-    command: pack
-    includeSymbols: true
+    command: 'pack'
     packagesToPack: '**/*.csproj'
-    versioningScheme: byPrereleaseNumber
+    versioningScheme: 'byPrereleaseNumber'
     majorVersion: '$(Major)'
     minorVersion: '$(Minor)'
     patchVersion: '$(Patch)'
+    includeSymbols: true
+    toolPackage: true
 
 - task: NuGetCommand@2
   inputs:
