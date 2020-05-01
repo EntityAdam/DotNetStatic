@@ -17,10 +17,10 @@ If no default document is found, it will show a directory browser.
 To exit the application use "CTRL+C" or close the command prompt.
 
 ## Install
-dotnet tool install --global DotNetStatic
+`dotnet tool install --global DotNetStatic`
 
 ## Uninstall
-dotnet tool uninstall -g DotNetStatic
+`dotnet tool uninstall -g DotNetStatic`
 
 ## Usage
 
